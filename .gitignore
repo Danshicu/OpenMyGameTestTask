@@ -70,3 +70,6 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+Assets/App/Scripts/Scenes/SceneWordSearch/Installers/Folder.DotSettings.user.meta
+Assets/App/Scripts/Scenes/SceneWordSearch/Installers/.idea/.idea.Installers.dir/.idea/indexLayout.xml
+Assets/App/Scripts/Scenes/SceneWordSearch/Installers/.idea/.idea.Installers.dir/.idea/encodings.xml

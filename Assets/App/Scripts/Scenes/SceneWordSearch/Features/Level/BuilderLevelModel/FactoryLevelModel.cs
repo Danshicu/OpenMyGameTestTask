@@ -21,8 +21,63 @@ namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel
 
         private List<char> BuildListChars(List<string> words)
         {
-            //напиши реализацию не меняя сигнатуру функции
-            throw new NotImplementedException();
+            Dictionary<char, int> maxCharCount = new Dictionary<char, int>();
+            foreach (string word in words)
+            {
+                Dictionary<char, int> currentCharCount = GetWordDictionary(word);
+                foreach (var incomePair in currentCharCount)
+                {
+                   char currentChar = incomePair.Key;
+                   int currentInt = incomePair.Value;
+                   if (maxCharCount.ContainsKey(currentChar))
+                   {
+                       if (maxCharCount[currentChar] < currentInt)
+                       {
+                           maxCharCount[currentChar] = currentInt;
+                       }
+                   }
+                   else
+                   {
+                       maxCharCount.Add(currentChar, currentInt);
+                   }
+                }
+            }
+
+            return CharListFromDictionary(maxCharCount);
+        }
+
+        private Dictionary<char, int> GetWordDictionary(string word)
+        {
+            Dictionary<char, int> targetDictionary = new Dictionary<char, int>();
+            for (int index = 0; index < word.Length; index++)
+            {
+                char currentChar = word[index];
+                if (targetDictionary.ContainsKey(currentChar))
+                {
+                    targetDictionary[currentChar]++;
+                }
+                else
+                {
+                    targetDictionary.Add(currentChar, 1);
+                }
+            }
+
+            return targetDictionary;
+        }
+
+        private List<char> CharListFromDictionary(Dictionary<char, int> charDictionary)
+        {
+            List<char> targetList = new List<char>();
+            foreach (var pair in charDictionary)
+            {
+                for (int index = 0; index < pair.Value; index++)
+                {
+                    targetList.Add(pair.Key);
+
+                }
+            }
+
+            return targetList;
         }
     }
 }
