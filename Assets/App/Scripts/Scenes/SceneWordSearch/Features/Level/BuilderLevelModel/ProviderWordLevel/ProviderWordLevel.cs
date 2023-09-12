@@ -10,10 +10,10 @@ namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel.Pr
     {
         public LevelInfo LoadLevelData(int levelIndex)
         {
-            using StreamReader reader = new StreamReader($"Assets/App/Resources/WordSearch/Levels/{levelIndex}.json");
-            var json = reader.ReadToEnd();
-            var words = JsonUtility.FromJson<LevelInfo>(json);
+            var jsonString = StringReader.GetAllFile($"Assets/App/Resources/WordSearch/Levels/{levelIndex}.json");
+            var words = JsonUtility.FromJson<LevelInfo>(jsonString);
             return words;
         }
+        
     }
 }

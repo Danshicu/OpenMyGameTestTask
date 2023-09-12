@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using App.Scripts.Libs.Factory;
 using App.Scripts.Scenes.SceneWordSearch.Features.Level.Models.Level;
+using App.Scripts.Tools;
 
 namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel
 {
@@ -43,7 +44,7 @@ namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel
                 }
             }
 
-            return CharListFromDictionary(maxCharCount);
+            return CharListFromDictionary(maxCharCount).Shuffle();
         }
 
         private Dictionary<char, int> GetWordDictionary(string word)
@@ -73,11 +74,11 @@ namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel
                 for (int index = 0; index < pair.Value; index++)
                 {
                     targetList.Add(pair.Key);
-
                 }
             }
 
             return targetList;
         }
+        
     }
 }
