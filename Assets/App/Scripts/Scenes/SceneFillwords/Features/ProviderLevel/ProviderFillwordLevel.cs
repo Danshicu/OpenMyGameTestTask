@@ -16,14 +16,15 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
             var fillWords = TryParseLevel(index);
             if (fillWords == null)
             {
-                if (index < StringReader.GetStringCount("Assets/App/Resources/Fillwords/pack_0.txt"))
-                {
-                    fillWords = TryParseLevel(index + 1);
-                    if (fillWords == null)
-                    {
-                        throw new Exception($"Level {index} invalid data");
-                    }
-                }
+                //if (index < StringReader.GetStringCount("Assets/App/Resources/Fillwords/pack_0.txt"))
+                //{
+                    return null;
+                    // fillWords = TryParseLevel(index + 1);
+                    // if (fillWords == null)
+                    // {
+                    //     throw new Exception($"Level {index} invalid data");
+                    // }
+                //}
             }
 
             return fillWords;

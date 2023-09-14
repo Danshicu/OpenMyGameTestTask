@@ -13,6 +13,8 @@ namespace App.Scripts.Scenes.SceneFillwords.States.Setup
         private readonly IProviderFillwordLevel _providerFillwordLevel;
         private readonly IServiceLevelSelection _serviceLevelSelection;
         private readonly ViewGridLetters _viewGridLetters;
+        private int offset = 0;
+        private int countOfLevels;
 
         public HandlerSetupFillwords(IProviderFillwordLevel providerFillwordLevel,
             IServiceLevelSelection serviceLevelSelection,
@@ -22,12 +24,24 @@ namespace App.Scripts.Scenes.SceneFillwords.States.Setup
             _serviceLevelSelection = serviceLevelSelection;
             _viewGridLetters = viewGridLetters;
             _containerGrid = containerGrid;
+            countOfLevels = StringReader.GetStringCount("Assets/App/Resources/Fillwords/pack_0.txt");
         }
 
         public Task Process()
         {
-            var model = _providerFillwordLevel.LoadModel(_serviceLevelSelection.CurrentLevelIndex);
-            
+            int logicalLevel = _serviceLevelSelection.CurrentLevelIndex + offset;
+            var model = _providerFillwordLevel.LoadModel(logicalLevel/(countOfLevels+1)+logicalLevel%(countOfLevels+1));
+            while (model == null)
+            {
+                logicalLevel++;
+                offset++;
+                model = _providerFillwordLevel.LoadModel(logicalLevel/(countOfLevels+1)+logicalLevel%(countOfLevels+1));
+            }
+
+            // if (_serviceLevelSelection.CurrentLevelIndex == countOfLevels)
+            // {
+            //     offset++;
+            // }
             _viewGridLetters.UpdateItems(model);
             _containerGrid.SetupGrid(model, _serviceLevelSelection.CurrentLevelIndex);
             return Task.CompletedTask;
