@@ -8,7 +8,6 @@ public static class StringReader
     public static string GetStringFromFile(int stringIndex, string filePath)
     {
         using StreamReader reader = new StreamReader(filePath);
-        int lineCounter = 0;
         while (stringIndex != 0)
         {
             reader.ReadLine();
@@ -22,6 +21,17 @@ public static class StringReader
     {
         using StreamReader reader = new StreamReader(filePath);
         return reader.ReadToEnd();
+    }
+
+    public static int GetStringCount(string filePath)
+    {
+        int lineCounter = 0;
+        using StreamReader reader = new StreamReader(filePath);
+        while(reader.ReadLine() != null)
+        {
+            lineCounter++;
+        }
+        return lineCounter;
     }
    
 }
