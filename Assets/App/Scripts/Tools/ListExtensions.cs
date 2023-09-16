@@ -8,14 +8,15 @@ namespace App.Scripts.Tools
         public static List<T> Shuffle<T>(this List<T> list)  
         {  
             Random rand = new Random();  
-            int n = list.Count;  
-            while (n > 1) {  
-                n--;  
-                int k = rand.Next(n + 1);  
-                (list[k], list[n]) = (list[n], list[k]);
+            int round = list.Count;  
+            while (round > 1) {  
+                round--;  
+                int temp = rand.Next(round + 1);  
+                (list[temp], list[round]) = (list[round], list[temp]);
             }
 
             return list;
         }
+        
     }
 }

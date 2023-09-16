@@ -21,7 +21,7 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
                     fillWords = TryParseLevel(index + 1);
                     if (fillWords == null)
                     {
-                        throw new Exception($"Level {index} invalid data");
+                        throw new Exception($"Levels {index}, {index+1} invalid data");
                     }
                 }
             }
@@ -35,10 +35,9 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
             string[] allWordsStrings = level.Split(' ');
             Dictionary<int, char> indexesWithChars = new Dictionary<int, char>();
             
-            for (int wordIndex = 0; wordIndex < allWordsStrings.Length / 2; wordIndex++)
+            for (int wordIndex = 0; wordIndex < allWordsStrings.Length; wordIndex+=2)
             {
-                int indexInArray = wordIndex * 2;
-                if (!TryParseWord(allWordsStrings[indexInArray], allWordsStrings[indexInArray + 1].Split(";"),
+                if (!TryParseWord(allWordsStrings[wordIndex], allWordsStrings[wordIndex+1].Split(";"),
                         indexesWithChars))
                 {
                     return null;
