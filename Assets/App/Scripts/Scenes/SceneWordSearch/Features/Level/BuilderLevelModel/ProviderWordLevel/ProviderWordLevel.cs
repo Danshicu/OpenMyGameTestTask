@@ -10,7 +10,7 @@ namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel.Pr
     {
         public LevelInfo LoadLevelData(int levelIndex)
         {
-            var jsonString = StringReader.GetAllFile($"Assets/App/Resources/WordSearch/Levels/{levelIndex}.json");
+            var jsonString = StringReader.GetAllFile(Path.Combine("WordSearch", "Levels", $"{levelIndex}"));
             var words = JsonUtility.FromJson<LevelInfo>(jsonString);
             return words;
         }

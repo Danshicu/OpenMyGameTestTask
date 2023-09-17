@@ -16,7 +16,7 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
             var fillWords = TryParseLevel(index);
             if (fillWords == null)
             {
-                if (index < StringReader.GetStringCount("Assets/App/Resources/Fillwords/pack_0.txt"))
+                if (index < StringReader.GetStringCount(Path.Combine("Fillwords", "pack_0")))
                 {
                     fillWords = TryParseLevel(index + 1);
                     if (fillWords == null)
@@ -31,7 +31,8 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
 
         private GridFillWords TryParseLevel(int index)
         {
-            string level = StringReader.GetStringFromFile(index-1, "Assets/App/Resources/Fillwords/pack_0.txt");
+            string level = StringReader.GetString(index-1, Path.Combine("Fillwords", "pack_0"));
+            
             string[] allWordsStrings = level.Split(' ');
             Dictionary<int, char> indexesWithChars = new Dictionary<int, char>();
             
@@ -61,11 +62,11 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
 
         private bool TryParseWord(string index, string[] charsQueue, Dictionary<int, char> charsPlaces)
         {
-            string word = StringReader.GetStringFromFile(int.Parse(index), "Assets/App/Resources/Fillwords/words_list.txt");
+            string word = StringReader.GetString(int.Parse(index), Path.Combine("Fillwords", "words_list"));
             
-            //Слово из словаря по индексу не совпадает по длине с индексами из уровня
+            //Indexes doesn't match
             if (word.Length != charsQueue.Length) 
-            {
+            { 
                 return false;
             }
             
@@ -85,7 +86,7 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
                 round++;
             }
 
-            return -1; //Уровень невозможно уложить в квадратную сетку
+            return -1; //Level can't be loaded as squate table
         }
         
         

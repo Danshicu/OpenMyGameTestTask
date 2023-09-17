@@ -24,7 +24,7 @@ namespace App.Scripts.Tools
                 int numberInGrid = int.Parse(charsQueue[charIndex]);
                 if (!charsPlaces.TryAdd(numberInGrid, word[charIndex]))
                 {
-                    return false; //Необходимая клетка уже содержит символ
+                    return false; //Required cell already contains symbol
                 }
             }
 

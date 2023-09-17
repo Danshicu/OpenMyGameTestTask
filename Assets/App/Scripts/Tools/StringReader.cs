@@ -5,33 +5,25 @@ using UnityEngine;
 
 public static class StringReader 
 {
-    public static string GetStringFromFile(int stringIndex, string filePath)
-    {
-        using StreamReader reader = new StreamReader(filePath);
-        while (stringIndex != 0)
-        {
-            reader.ReadLine();
-            stringIndex--;
-        }
-
-        return reader.ReadLine();
-    }
-
     public static string GetAllFile(string filePath)
     {
-        using StreamReader reader = new StreamReader(filePath);
-        return reader.ReadToEnd();
+        TextAsset fileText = Resources.Load<TextAsset>(filePath);
+        return fileText.text;
     }
 
     public static int GetStringCount(string filePath)
     {
-        int lineCounter = 0;
-        using StreamReader reader = new StreamReader(filePath);
-        while(reader.ReadLine() != null)
-        {
-            lineCounter++;
-        }
-        return lineCounter;
+        TextAsset fileText = Resources.Load<TextAsset>(filePath);
+        var word = fileText.text.Split("\n");
+        return word.Length;
     }
-   
+
+    public static string GetString(int stringIndex, string filePath)
+    {
+        TextAsset fileText = Resources.Load<TextAsset>(filePath);
+        var word = fileText.text.Split("\n")[stringIndex];
+        word = word.Remove(word.Length - 1);
+        return word;
+    }
+    
 }
